@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Open Radiation</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <script src="lib/jquery-1.6.4.js"></script>
+        <script src="lib/jquery.mobile-1.1.0.js"></script>
+        <script src="lib/iscroll.js"></script>
+        <script src="lib/jquery.mobile.iscroll.js"></script>
+        <script src="js/leaflet.js"></script>
+        <link href="src/css/jquery.mobile.structure-1.1.0.css" rel="stylesheet">
+        <link href="src/css/jquery.mobile.theme-1.1.0.css" rel="stylesheet">
+        <link href="css/leaflet.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div data-role="page" id="PageMenuPrincipal" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Open Radiation</h1>
+            </div>
+            <div data-role="content">
+                <a data-role="button" id="nouvelleMesureBtn">Nouvelle mesure</a>
+                <a data-role="button" id="mesMesuresBtn">Mes mesures</a>
+                <a data-role="button" id="toutesLesMesuresBtn">Toutes les mesures</a>
+                <a data-role="button" id="optionsBtn">Options</a>
+            </div>
+        </div>
+    
+        <div data-role="page" id="PageMesMesures" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Mes mesures</h1>
+                <a data-role="button" class="closeToPageMenuPrincipal" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <div data-iscroll="scroller">
+                    <ul data-role="listview" data-theme="c" id="mesMesuresListe"></ul>
+                </div>
+            </div>
+            <div data-role="footer" align="center">
+                <br/>
+                <a data-role="button" id="visualiserMesMesuresBtn">Visualiser</a>&nbsp;&nbsp;&nbsp;
+                <a data-role="button" id="#">Envoyer au serveur</a>&nbsp;&nbsp;&nbsp;
+                <a data-role="button" id="effacerMesMesuresBtn">Effacer</a>
+                <br/><br/>
+            </div>
+        </div>
+        
+        <div data-role="page" id="PageVisualisationMesures" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Mes mesures</h1>
+                <a data-role="button" id="closeToPageMesMesures" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <div id="openradiation_map_perso"></div>
+            </div>
+        </div>
+        
+        <div data-role="page" id="PageToutesLesMesures" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Toutes les mesures</h1>
+                <a data-role="button" class="closeToPageMenuPrincipal" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <div id="openradiation_map"></div>
+            </div>
+        </div>
+        
+        <div data-role="page" id="PageOptions" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Options</h1>
+                <a data-role="button" class="closeToPageMenuPrincipal" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                
+            </div>
+        </div>
+    
+        <div data-role="page" id="ScanDevice" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Nouvelle mesure</h1>
+                <a data-role="button" class="closeToPageMenuPrincipal" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <a data-role="button" id="refreshButton">Scan</a>
+                <ul data-role="listview" id="deviceList" data-inset="true"></ul>
+            </div>
+        </div>
+        
+        <div data-role="page" id="PageChoixTypeMesure" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Nouvelle mesure</h1>
+                <a data-role="button" id="closeToScan" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <p>Quelle type de mesure souhaitez-vous démarrer ?</p>
+                <a data-role="button" id="envButton">Environementale</a>
+                <a data-role="button" id="dosiButton">Dosimétrique</a>
+                <a data-role="button" id="testTubeButton">Tester mon tube</a>
+            </div>
+            <div data-role="footer" class="infoDevice"></div>
+        </div>
+        
+        <div data-role="page" id="Measure" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Mesure d'environements</h1>
+                <a data-role="button" class="closeToPageChoixTypeMesure" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <div data-iscroll="scroller">
+                    <a data-role="button" id="SBM20Btn">SBM20</a>
+                    <div data-role="fieldcontain" id="pwmSlider">
+                        <label for="pwmSliderRange">Tension :</label>
+                        <input type="range" id="pwmSliderRange" value="12" min="0" max="800" data-highlight="true">
+                    </div>
+                    <div data-role="fieldcontain" id="intervalSlider">
+                        <label for="intervalSliderRange">Interval (coups) :</label>
+                        <input type="range" id="intervalSliderRange" value="2" min="1" max="50" data-highlight="true">
+                    </div>
+                    <div data-role="fieldcontain" id="intervalTimeSlider">
+                        <label for="intervalTimeSliderRange">Interval (temps) :</label>
+                        <input type="range" id="intervalTimeSliderRange" value="1" min="1" max="60" data-highlight="true">
+                    </div>
+                    <div align="center"><div id="valueDisplay">0 cp</div><img id="infoBtn" src="img/icones/warn.png"/></div>
+                    <a data-role="button" id="resetBtn">Reset</a>
+                    <canvas id="histoCanvas">Pas de canvas.</canvas>
+                    <div align="center"><div id="timeDisplay">0</div></div>
+                    <div align="center"><div id="moyDisplay">0</div></div>
+                    <a data-role="button" id="sendToServerBtn">Envoyer au serveur</a>
+                    <br/><br/>
+                </div>
+            </div>
+            <div data-role="footer" class="infoDevice"></div>
+        </div>
+        
+        <div data-role="page" id="PageTestTube" data-iscroll="enable">
+            <div data-role="header">
+                <h1>Test du tube</h1>
+                <a data-role="button" class="closeToPageChoixTypeMesure" data-icon="arrow-l">Retour</a>
+            </div>
+            <div data-role="content">
+                <a data-role="button" id="startStopTestTubeBtn">Start</a>
+                <div align="center">
+                    <canvas id="testTubeCanvas">Pas de canvas.</canvas>
+                </div>
+            </div>
+            <div data-role="footer" class="infoDevice"></div>
+        </div>
+        
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

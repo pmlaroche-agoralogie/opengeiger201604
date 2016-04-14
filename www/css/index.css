@@ -1,0 +1,69 @@
+* {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-user-select: none;                 /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+[contenteditable="true"] , input, textarea {
+    -webkit-user-select: auto !important;
+    -khtml-user-select: auto !important;
+    -moz-user-select: auto !important;
+    -ms-user-select: auto !important;
+    -o-user-select: auto !important;
+    user-select: auto !important;
+}
+
+.infoDevice {
+    height: 100px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#openradiation_map {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+}
+
+#openradiation_map_perso {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+}
+
+.nav-glyphish-example .ui-btn .ui-btn-inner {
+    padding-top: 40px !important; 
+}
+
+.nav-glyphish-example .ui-btn .ui-icon { 
+    width: 45px!important; 
+    height: 35px!important; 
+    margin-left: -24px !important; 
+    box-shadow: none!important; 
+    -moz-box-shadow: none!important; 
+    -webkit-box-shadow: none!important;
+    -webkit-border-radius: none !important;
+    border-radius: none !important; 
+}
+.ui-icon-settings { background:  url(../img/icones/19-gear.png) 50% 50% no-repeat;}
+.ui-icon-historic { background:  url(../img/icones/17-bar-chart.png) 50% 50% no-repeat;}
+
+#valueDisplay {
+	font-weight: bold;
+	border: 1px solid;
+	border-color: #9F6000 /*{a-bup-color}*/;
+	text-align: center;
+	width: 20%;
+	-webkit-border-radius: 1em 1em 1em 1em;
+	border-radius: 1em 1em 1em 1em;
+	padding: 0.3em 0.8em 0.3em 0.8em;
+	background-color: #FEEFB3;
+}
